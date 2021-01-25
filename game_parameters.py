@@ -1,4 +1,4 @@
-''' Game parameters '''
+''' Game Parameters '''
 
 # board dimensions
 BOARD_LENGTH = 5
