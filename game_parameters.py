@@ -1,6 +1,6 @@
 ''' Game parameters '''
 
-# board dimension
+# board dimensions
 BOARD_LENGTH = 5
 BOARD_WIDTH = 3
 
