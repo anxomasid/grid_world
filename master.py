@@ -15,7 +15,7 @@ class State:
         self.board[1, 1] = -1
         self.state = state
         self.isEnd = False
-        self.determine = DETERMINISTI
+        self.determine = DETERMINISTIC
 
     def giveReward(self):
         if self.state == WIN_STATE:
