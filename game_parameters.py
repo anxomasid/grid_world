@@ -1,0 +1,5 @@
+BOARD_LENGTH = 5
+BOARD_WIDTH = 3
+START = (1, 1)
+WIN = (2, 3)
+LOSE = (3, 2)
