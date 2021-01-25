@@ -1,1 +1,4 @@
 ''' State '''
+
+class State:
+    
