@@ -2,7 +2,7 @@
 
 # import libraries and variables
 import numpy
-from game_parameters import *
+from parameters import *
 
 # define State class
 class State:
