@@ -41,3 +41,9 @@ class Agent:
     def reset(self):
         self.states = []
         self.State = State()
+
+    def play(self):
+        'Falta'
+
+    def showRewardValues(self):
+        'Falta'
