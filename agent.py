@@ -42,7 +42,7 @@ class Agent:
         self.states = []
         self.State = State()
 
-    def play(self):
+    def play(self, number_rounds=NUMBER_ROUNDS):
         'Falta'
 
     def showRewardValues(self):
