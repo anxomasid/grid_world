@@ -7,11 +7,11 @@ from parameters import *
 # define State class
 class State:
 
-    def __init__(self, state=START, input_step=INPUT_STEP):
+    def __init__(self, state=STATE_START, deterministic=DETERMINISTIC):
         self.board = numpy.zeros(BOARD_LENGTH, BOARD_WIDTH)
         self.state = state
         self.endGame = False
-        self.inputStep = INPUT_STEP
+        self.deterministic = DETERMINISTIC
 
     def valueReward(self):
         if self.state == WIN:
@@ -25,23 +25,31 @@ class State:
 
     def nextPosition(self, action):
         'Falta checkear OBSTACLES y INPUT_STEP'
-        if action == 'up':
-            nextState = (self.State[0], self.State[1] + 1)
-        elif action == 'down':
-            nextState = (self.State[0], self.State[1] - 1)
-        elif action == 'right':
-            nextState = (self.State[0] + 1, self.State[1])
-        elif action == 'left':
-            nextState = (self.State[0] - 1, self.State[1])
-        elif action == 'up-right':
-            nextState = (self.State[0] + 1, self.State[1] + 1)
-        elif action == 'up-left':
-            nextState = (self.State[0] + 1, self.State[1] - 1)
-        elif action == 'down-right':
-            nextState = (self.State[0] + 1, self.State[1] - 1)
-        elif action == 'down-left':
-            nextState = (self.State[0] - 1, self.State[1] - 1)
-        return nextState
+        if self.deterministic:
+            if action == 'up':
+                nextState = (self.state[0], self.state[1] + 1)
+            elif action == 'down':
+                nextState = (self.state[0], self.state[1] - 1)
+            elif action == 'right':
+                nextState = (self.state[0] + 1, self.state[1])
+            elif action == 'left':
+                nextState = (self.state[0] - 1, self.state[1])
+            elif action == 'up-right':
+                nextState = (self.state[0] + 1, self.state[1] + 1)
+            elif action == 'up-left':
+                nextState = (self.state[0] + 1, self.state[1] - 1)
+            elif action == 'down-right':
+                nextState = (self.state[0] + 1, self.state[1] - 1)
+            elif action == 'down-left':
+                nextState = (self.state[0] - 1, self.state[1] - 1)
+            if (nextState[0] >= 1) and (
+                nextState[0] <= (BOARD_LENGTH)) and (
+                nextState[1] >= 1) and (
+                nextState[1] <= (BOARD_WIDTH)) and (
+                nextState != x for x in STATE_OBSTACLES):
+                return nextState
+        return self.state
 
     def plotBoard(self):
+        self.board[self.state] = 1
         'Falta función de plot'
