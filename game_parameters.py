@@ -9,3 +9,6 @@ START = (1, 1)
 WIN = (2, 3)
 LOSE = (3, 2)
 OBSTACLES = [(1, 3), (3, 1)]
+
+# options
+INPUT_STEP = True
