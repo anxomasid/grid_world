@@ -1,10 +1,8 @@
 ''' State '''
 
-# import libraries and variables
 import numpy
 from parameters import *
 
-# define State class
 class State:
 
     def __init__(self, state=STATE_START, deterministic=DETERMINISTIC):
@@ -50,5 +48,24 @@ class State:
         return self.state
 
     def plotBoard(self):
-        self.board[self.state] = 1
-        'Falta función de plot'
+        self.board[self.state] = 0.1
+        self.board[WIN_STATE] = 1
+        self.board[LOSE_STATE] = -1
+        self.board[(1, 1)] = -0.1
+        for i in range(1, BOARD_WIDTH + 1):
+            print('----' * BOARD_LENGTH + '-')
+            out = '| '
+            for j in range(0, BOARD_LENGTH):
+                if self.board[i, j] == 0.1:
+                    token = 'O'
+                if self.board[i, j] == 1:
+                    token = 'W'
+                if self.board[i, j] == -1:
+                    token = 'L'
+                if self.board[i, j] == -0.1:
+                    token = 'X'
+                if self.board[i, j] == 0:
+                    token = ' '
+                out += token + ' | '
+            print(out)
+        print('----' * BOARD_BOARD_LENGTH + '-')
