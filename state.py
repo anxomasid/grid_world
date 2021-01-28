@@ -24,7 +24,6 @@ class State:
             return 0
 
     def nextPosition(self, action):
-        'Falta checkear OBSTACLES y INPUT_STEP'
         if self.deterministic:
             if action == 'up':
                 nextState = (self.state[0], self.state[1] + 1)
@@ -46,7 +45,7 @@ class State:
                 nextState[0] <= (BOARD_LENGTH)) and (
                 nextState[1] >= 1) and (
                 nextState[1] <= (BOARD_WIDTH)) and (
-                nextState != x for x in STATE_OBSTACLES):
+                nextState not in STATE_OBSTACLES):
                 return nextState
         return self.state
 
