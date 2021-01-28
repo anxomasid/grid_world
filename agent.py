@@ -6,7 +6,7 @@ from state import State
 
 class Agent:
     def __init_(self, exporation_rate=EXPLORATION_RATE, learning_rate=LEARNING_RATE):
-        self.State = State()
+        self.state = State()
         self.states = []
         self.actions = ['up', 'down', 'right', 'left', 'up-right', 'up-left', 'down-right', 'down-left']
         self.learning_rate = learning_rate
@@ -30,39 +30,32 @@ class Agent:
                     max_next_reward = next_reward
 
     def takeAction(self, action):
-        position = self.State.nextPosition(action)
+        position = self.state.nextPosition(action)
         return State(state=position)
 
     def reset(self):
         self.states = []
-        self.State = State()
+        self.state = State()
 
     def play(self, number_rounds=NUMBER_ROUNDS):
         i = 0
         j = 0
         while i < rounds:
-            # to the end of game back propagate reward
-            if self.State.isEnd:
-                # back propagate
-                reward = self.State.giveReward()
-                # explicitly assign end state to reward values
-                self.state_values[self.State.state] = reward  # this is optional
+            if self.State.endGame:
+                reward = self.State.valueReward()
+                self.state_reward_values[self.state.state] = reward
                 print("Game {} End Reward {}: #movements {}".format(i, reward, j))
                 for s in reversed(self.states):
-                    reward = self.state_values[s] + self.lr * (reward - self.state_values[s])
-                    self.state_values[s] = round(reward, 3)
+                    reward = self.state_reward_values[s] + self.lr * (reward - self.state_reward_values[s])
+                    self.state_reward_values[s] = round(reward, 3)
                 self.reset()
                 i += 1
                 j = 0
             else:
                 action = self.chooseAction()
-                # append trace
                 self.states.append(self.State.nxtPosition(action))
-                #print("current position {} action {}".format(self.State.state, action))
-                # by taking the action, it reaches the next state
-                self.State = self.takeAction(action)
-                # mark is end
-                self.State.isEndFunc()
+                self.state = self.takeAction(action)
+                self.state.valueReward()
                 #print("nxt state", self.State.state)
                 #print("---------------------")
                 j += 1
